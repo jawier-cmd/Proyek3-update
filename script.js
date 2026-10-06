@@ -29,23 +29,25 @@ const proyekSelesai = proyek
 // Menampilkan Hasil
 console.log(sapaPengunjung(username));
 console.log(`Role: ${role}`);
-console.log("Proyek yang selesai:", proyekSelesai);
-// --- PRAKTIK FETCH API ---
-const ambilQuote = async () => {
-    try {
-        console.log("Memuat data dari internet...");
+console.log("Proyek yang selesai:", proyekSelesai)
 
-        // Mengambil data dari API publik
+// --- TAHAP 4: INTEGRASI FETCH API KE DOM HTML ----
+const ambilQuote = async () => {
+    const quoteText = document.getElementById("quote-text");
+    const quoteAuthor = document.getElementById("quote-author");
+
+    try {
         const response = await fetch("https://dummyjson.com/quotes/random");
         const data = await response.json();
 
-        // Menampilkan hasil data JSON
-        console.log(`Quote: "${data.quote}"`);
-        console.log(`Penulis: ${data.author}`);
+        // Menyisipkan data ke dalam elemen HTML
+        quoteText.textContent = `"${data.quote}"`;
+        quoteAuthor.textContent = `— ${data.author}`;
     } catch (error) {
-        console.log("Gagal mengambil data:", error);
+        quoteText.textContent = "Gagal memuat quote.";
+        console.error("Error:", error);
     }
 };
 
-// Jalankan fungsi
-ambilQuote();
+// Jalankan fungsi saat halaman selesai dimuat
+document.addEventListener("DOMContentLoaded", ambilQuote);
