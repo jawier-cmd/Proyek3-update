@@ -30,3 +30,22 @@ const proyekSelesai = proyek
 console.log(sapaPengunjung(username));
 console.log(`Role: ${role}`);
 console.log("Proyek yang selesai:", proyekSelesai);
+// --- PRAKTIK FETCH API ---
+const ambilQuote = async () => {
+    try {
+        console.log("Memuat data dari internet...");
+
+        // Mengambil data dari API publik
+        const response = await fetch("https://dummyjson.com/quotes/random");
+        const data = await response.json();
+
+        // Menampilkan hasil data JSON
+        console.log(`Quote: "${data.quote}"`);
+        console.log(`Penulis: ${data.author}`);
+    } catch (error) {
+        console.log("Gagal mengambil data:", error);
+    }
+};
+
+// Jalankan fungsi
+ambilQuote();
